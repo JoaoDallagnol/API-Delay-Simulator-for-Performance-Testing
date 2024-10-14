@@ -22,4 +22,12 @@ func CustomDelay(duration int) error {
 	return nil
 }
 
+func TimeoutResponse(timeout int) error {
+	if timeout < 0 {
+		return errors.New("invalid timeout parameter")
+	}
+	time.Sleep(time.Duration(timeout) * time.Second)
+	return nil
+}
+
 var ErrInvalidDelay = errors.New("invalid delay parameter")

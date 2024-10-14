@@ -64,7 +64,7 @@ curl -X GET http://localhost:8080/delaye
 
 #### Example:
 ```bash
-curl -X GET http://localhost:8080/delaye
+curl -X GET http://localhost:8080/unstable
 ```
 
 #### Possible Responses:
@@ -104,5 +104,29 @@ curl -X GET "http://localhost:8080/custom-delay?delay=10"
 ```json
 {
   "error": "invalid delay parameter"
+}
+```
+
+### 4. Timeout
+**Endpoint** `/timeout?timeout={seconds}`
+
+**Description**: Simulates a timeout after the specified duration (in seconds). The timeout query parameter defines how long the request should take before returning a 504 Gateway Timeout. If no parameter is passed, the default timeout is 5 seconds.
+
+#### Example:
+```bash
+curl -X GET "http://localhost:8080/timeout?timeout=5"
+```
+
+#### Possible Response:
+
+```json
+{
+  "message": "Request timed out after 5 seconds"
+}
+```
+
+```json
+{
+  "error": "Invalid timeout parameter"
 }
 ```

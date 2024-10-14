@@ -47,6 +47,26 @@ func CustomDelayHandler(w http.ResponseWriter, r *http.Request) {
 	jsonResponse(w, response, http.StatusOK)
 }
 
+func TimeoutHandler(w http.ResponseWriter, r *http.Request) {
+	timeoutParam := r.URL.Query().Get("timeout")
+	if timeoutParam == "" {
+		timeoutParam = "5"
+	}
+
+	timeout, err := strconv.Atoi(timeoutParam)
+	if err != nil || timeout < 0 {
+		http.Error(w, "Invalid timeout parameter", http.StatusBadRequest)
+		return
+	}
+
+	if err := service.TimeoutResponse(timeout); err != nil {
+		http.Error(w, err.Error(), http.StatusGatewayTimeout)
+		return
+	}
+
+	http.Error(w, "Request timed out after "+strconv.Itoa(timeout)+" seconds", http.StatusGatewayTimeout)
+}
+
 func jsonResponse(w http.ResponseWriter, data interface{}, statusCode int) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(statusCode)

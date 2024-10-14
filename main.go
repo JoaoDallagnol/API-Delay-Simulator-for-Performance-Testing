@@ -11,6 +11,7 @@ func main() {
 	http.HandleFunc("/delaye", handler.DelayHandler)
 	http.HandleFunc("/unstable", handler.UnstableHandler)
 	http.HandleFunc("/custom-delay", handler.CustomDelayHandler)
+	http.HandleFunc("/timeout", handler.TimeoutHandler)
 
 	log.Println("Server is running on port 8080")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
