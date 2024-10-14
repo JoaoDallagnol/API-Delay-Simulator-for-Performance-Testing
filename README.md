@@ -8,6 +8,7 @@ The project has three main endpoints:
 - `/delaye`: Simulates a fixed delay of 5 seconds before returning a response.
 - `/unstable`: Simulates an unstable endpoint where there's a 30% chance of failure (HTTP 500).
 - `/custom-delay`: Accepts a query parameter to simulate a custom delay in seconds.
+- `/timeout`: Accepts a query parameter to simulate a timeout error in seconds.
 
 The API is built using Go's standard `net/http` library to keep it lightweight and straightforward, making it a perfect starting point for performance tests.
 
